@@ -98,6 +98,11 @@ def handle_http_error(e):
         "message": e.description
     }), e.code
 
+# ✅ Health check route for UptimeRobot (place it OUTSIDE the error handler)
+@app.route("/", methods=["GET"])
+def health():
+    return jsonify({"message": "CodePlay backend is running"}), 200
+
 # --- Main ---
 if __name__ == '__main__':
     port = int(os.getenv("PORT", 8000))
